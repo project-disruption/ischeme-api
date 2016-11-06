@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  payout_limit: 9.99
+  excess: 9.99
+  premium: 9.99
+
+two:
+  name: MyString
+  description: MyText
+  payout_limit: 9.99
+  excess: 9.99
+  premium: 9.99
