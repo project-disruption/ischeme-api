@@ -46,6 +46,6 @@ class SchemesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def scheme_params
-      params.require(:scheme).permit(:name, :description, :payout_limit, :excess, :premium)
+      params.require(:data).require(:attributes).permit(:name, :description, :payout_limit, :excess, :premium)
     end
 end
