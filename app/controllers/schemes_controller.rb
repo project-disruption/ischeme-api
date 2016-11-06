@@ -1,5 +1,6 @@
 class SchemesController < ApplicationController
   before_action :set_scheme, only: [:show, :update, :destroy]
+  before_action :authenticate 
 
   # GET /schemes
   def index
@@ -16,6 +17,8 @@ class SchemesController < ApplicationController
   # POST /schemes
   def create
     @scheme = Scheme.new(scheme_params)
+
+    puts scheme_params
 
     if @scheme.save
       render jsonapi: @scheme, status: :created, location: @scheme
