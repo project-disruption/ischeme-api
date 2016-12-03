@@ -4,35 +4,32 @@ class SchemesController < ApplicationController
 
     # GET /schemes
     def index
-        @schemes = Scheme.all
-
-        render jsonapi: @schemes
+        render json: current_user.schemes
     end
 
     # GET /schemes/1
     def show
-        render jsonapi: @scheme
+        render json: @scheme
     end
 
     # POST /schemes
     def create
         @scheme = Scheme.new(scheme_params)
 
-        puts scheme_params
-
         if @scheme.save
-            render jsonapi: @scheme, status: :created, location: @scheme
+            @scheme.users << current_user
+            render json: @scheme, status: :created, location: @scheme
         else
-            render jsonapi: @scheme.errors, status: :unprocessable_entity
+            render json: @scheme.errors, status: :unprocessable_entity
         end
     end
 
     # PATCH/PUT /schemes/1
     def update
         if @scheme.update(scheme_params)
-            render jsonapi: @scheme
+            render json: @scheme
         else
-            render jsonapi: @scheme.errors, status: :unprocessable_entity
+            render json: @scheme.errors, status: :unprocessable_entity
         end
     end
 
@@ -50,6 +47,6 @@ class SchemesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def scheme_params
-        params.require(:data).require(:attributes).permit(:name, :description, :payout_limit, :excess, :premium)
+        params.require(:scheme).permit(:name, :description, :payout_limit, :excess, :premium)
     end
 end
