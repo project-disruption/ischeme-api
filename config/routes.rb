@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+    get 'users/new'
+
+    get 'users/create'
+
     post 'user_token' => 'user_token#create'
     resources :schemes
     resources :users
