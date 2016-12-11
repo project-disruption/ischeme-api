@@ -2,6 +2,11 @@ class UsersController < ApplicationController
     def new
     end
 
+    def index
+      ## Added to create a list of all users for creating the many-to-many relationship. Refactor when JWT passing variables nicely.
+      render json: User.select(:name, :id).all
+    end
+
     def create
         user = User.new(user_params)
         if user.save
